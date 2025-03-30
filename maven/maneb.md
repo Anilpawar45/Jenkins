@@ -20,25 +20,21 @@ Maven has a plugin architecture, allowing developers to extend its functionality
 ## Standardized Build Process:
 Maven provides a standardized build process, making it easier for developers to understand and work with projects, regardless of their size or complexity. 
 
-## Benefits:
-
-### Simplified Build Process: 
-Maven automates tasks, reducing manual effort and errors. 
-Improved Dependency Management: Maven handles dependencies, ensuring projects have the correct libraries and versions. 
-
-### Standardized Project Structure:
-Maven's standard directory layout makes projects easier to understand and maintain. 
-
-### Extensibility:
-Maven's plugin architecture allows for easy customization and extension. 
-
-## Use Cases:
-
-### Java Projects: 
-Maven is widely used for Java-based applications. 
-### Dependency Management: 
-Maven simplifies dependency management for Java projects. 
-### Build Automation:
-Maven automates the build process, saving time and effort. 
-### Project Management:
-Maven helps manage complex projects with a standard structure. 
+## Maven Lifecycle Phases
+### Default lifecycle phases
+validate - validate the project is correct and all necessary information is available
+compile - compile the source code of the project
+test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+package - take the compiled code and package it in its distributable format, such as a JAR.
+verify - run any checks on results of integration tests to ensure quality criteria are met
+install - install the package into the local repository, for use as a dependency in other projects locally
+deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+### Clean 
+clear the old build project
+### site
+Helps to create web documentation
+## Maven Installation Process
+to install maven Java is required
+install Java in --> jenkins & nodes
+```
+sudo apt install default-jdk -y
