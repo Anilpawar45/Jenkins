@@ -46,7 +46,8 @@ Faster Feedback: Quickly identify and fix issues in the development process.
 Facilitate collaboration among developers by enabling frequent integration and testing. 
 ### Increased Reliability: 
 Automate deployments, leading to more reliable and predictable software releases. 
-### Scalability: Jenkins can be scaled to handle large and complex projects. 
+### Scalability: 
+Jenkins can be scaled to handle large and complex projects. 
 ### Open Source: 
 Jenkins is free to use and customize. 
 ## Jenkins Architecture:
