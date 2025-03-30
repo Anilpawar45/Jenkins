@@ -68,13 +68,15 @@ update-alternatives --config java
 sudo apt-get install openjdk-8-jdk -y
 sudo mvn clean
 ls target/
-
+```
 ### pipeline
 pipeline sysntax
 step --> sample step --> select --> sh:shell script
+
 ```
 mvn clean package
 ```
+
 Generate pipeline script
 ```
 sh 'mvn clean package'
