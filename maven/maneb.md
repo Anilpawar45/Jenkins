@@ -60,6 +60,7 @@ sudo mvn validate
 sudo mvn package
 sudo mvn clean
 sudo mvn clean package
+
 ### java select package command
 ```
 update-alternatives --config java
