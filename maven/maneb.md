@@ -37,4 +37,11 @@ Helps to create web documentation
 to install maven Java is required
 install Java in --> jenkins & nodes
 ```
-sudo apt install default-jdk -y
+    sudo apt-get update
+    sudo apt-get install openjdk-17-jdk -y
+```
+## maven install
+```
+sudo apt install maven -y
+mvn -version
+```
