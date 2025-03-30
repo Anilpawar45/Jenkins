@@ -48,7 +48,6 @@ mvn -version
 ### Creating a project
 ```
 mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=myproject
-```
 ls -a
 cd myproject/
 sudo apt-get install tree -y
@@ -57,8 +56,14 @@ cd studentapp.ui/
 
 ### maven command to project build
 ```
-mvn validate
-mvn package
-mvn clean
-mvn clean package
+sudo mvn validate
+sudo mvn package
+sudo mvn clean
+sudo mvn clean package
+### java select package command
+```
+update-alternatives --config java
+sudo apt-get install openjdk-8-jdk -y
+sudo mvn clean
+ls target/
 
