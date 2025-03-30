@@ -5,7 +5,7 @@ Jenkins is a self-contained, open-source automation server written in Java that 
 ## CI/CD:
 Jenkins is primarily used to implement CI/CD workflows, which automate the process of integrating code changes, building, testing, and deploying software. 
 
-# Jenkins installation process
+## Jenkins installation process
 ```
 sudo apt-get update
 sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
@@ -31,23 +31,18 @@ sudo systemctl status jenkins
 port add 8080 
 hit public ip --> 0.0.0.0:8080 this like
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## setup jenkins user and password
+```
+ls /var/lib/jenkins
+sudo cat /var/lib/jenkins/secrets/initial
+```
+admin password show
+(copy password and paste jenkins web page)
+customize jenkins 
+1. install suggested plugins
+2. select plugins to install
+select without plugins 2
+select --> none --install jenkins
 
 
 ## How it works:
