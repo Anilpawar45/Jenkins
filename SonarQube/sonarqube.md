@@ -5,6 +5,9 @@ SonarQube is an open-source platform developed by SonarSource for continuous ins
 ## Why do I need to use SonarQube?
 With SonarQube, developers can ensure source code quality and application security by identifying and rectifying code duplication and potential bugs. Take a closer look at how the Sonar scanner ensures code reliability, detects bugs, and alerts developers to other source code issues.
 
+![image](https://github.com/user-attachments/assets/5112bdd9-6134-494a-82e5-9d0fddb87407)
+
+
 ## Download and Install
 1. Install OpenJDK 17
 ```shell 

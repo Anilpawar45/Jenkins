@@ -1,213 +1,111 @@
-# What is SonarQube?
-SonarQube is an open-source platform developed by SonarSource for continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs and code smells on 29 programming languages.
+# Jenkins
+Jenkins is an open-source automation server used for implementing continuous integration and continuous delivery (CI/CD) processes, automating tasks like building, testing, and deploying software, and is a popular DevOps tool. 
+## What it is:
+Jenkins is a self-contained, open-source automation server written in Java that facilitates the automation of tasks related to building, testing, and deploying software. 
+## CI/CD:
+Jenkins is primarily used to implement CI/CD workflows, which automate the process of integrating code changes, building, testing, and deploying software. 
 
-# Why do I need to use SonarQube?
-With SonarQube, developers can ensure source code quality and application security by identifying and rectifying code duplication and potential bugs. Take a closer look at how the Sonar scanner ensures code reliability, detects bugs, and alerts developers to other source code issues.
-
-# Download and Install
-1. Install OpenJDK 17
-```shell 
-    sudo apt-get update
-    sudo apt-get install openjdk-17-jdk -y 
+## Jenkins installation process
 ```
-2. Add the PostgreSQL repository
-
-```shell 
-sudo sh -c 'echo “deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main” /etc/apt/sources.list.d/pgdg.list' 
-```
-
-3. Install PostgreSQL
-
-```shell 
-sudo apt install postgresql postgresql-contrib -y 
+sudo apt-get update
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
 ```
 
-4. Enable the database server to start automatically on reboot
-
-```shell 
-sudo systemctl enable postgresql 
+## java package download
+```
+sudo apt-get update
+sudo apt-get install openjdk-17-jdk -y
+java --version
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo systemctl status jenkins
 ```
 
-5. Start the database server
+### Security group add 
+port add 8080 
+hit public ip --> 0.0.0.0:8080 this like
 
-```shell 
-sudo systemctl start postgresql
+## setup jenkins user and password
 ```
-
-6. Change the default PostgreSQL password
-
-```shell 
-sudo passwd postgres
+ls /var/lib/jenkins
+sudo cat /var/lib/jenkins/secrets/initial
 ```
+admin password show
+(copy password and paste jenkins web page)
+customize jenkins 
+1. install suggested plugins
+2. select plugins to install
+select without plugins 2
 
-7. Switch to the postgres user
+select --> none --install jenkins
 
-```shell 
-su - postgres
-```
 
-8. Create a user sonar
+## How it works:
+Jenkins automates these processes by executing jobs triggered by events like new commits, branches, or pull requests. 
+## What is Jenkins?
+### Open-Source Automation Server:
+Jenkins is a free and open-source software tool written in Java, designed to automate repetitive tasks in software development. 
+### CI/CD:
+It's primarily used for implementing CI/CD, a software development approach where code changes are frequently integrated into a shared repository, and then automatically built, tested, and deployed. 
+### Automation:
+Jenkins automates tasks like building, testing, and deploying software, reducing manual effort and errors. 
+## Key Concepts and Features:
+### Jobs:
+Jenkins uses "jobs" to represent tasks or pipelines that need to be automated. 
+### Triggers:
+Jobs can be triggered by events like code commits, scheduled times, or manual actions. 
+### Plugins:
+Jenkins is highly extensible through plugins, allowing it to integrate with various tools and technologies. 
+### Pipelines:
+Jenkins Pipeline is a powerful feature that allows you to define and manage CI/CD workflows as code in a Jenkinsfile. 
+### Jenkinsfile:
+A text file that defines the steps and stages of a Jenkins pipeline, enabling version control and review of the pipeline itself. 
+### Stages:
+Pipelines are composed of stages, each representing a specific task or phase in the CI/CD process (e.g., build, test, deploy). 
+### Nodes:
+Jenkins can run on multiple nodes (servers or machines), allowing for distributed builds and tests. 
+### Builds:
+Jenkins builds software artifacts (e.g., compiled code, packages) based on the defined pipeline. 
+### Testing:
+Jenkins integrates with various testing frameworks and tools to automate the testing process. 
+### Deployment:
+Jenkins can automate the deployment of software to different environments (e.g., development, staging, production). 
+### Continuous Integration:
+Jenkins facilitates continuous integration by automatically building and testing code changes as they are committed to the repository. 
+### Continuous Delivery:
+Jenkins enables continuous delivery by automating the release process, making it easier to deploy software frequently and reliably. 
+## Why Use Jenkins?
+### Automation:
+Automate repetitive tasks, reducing manual effort and errors. 
+Faster Feedback: Quickly identify and fix issues in the development process. 
+### Improved Collaboration:
+Facilitate collaboration among developers by enabling frequent integration and testing. 
+### Increased Reliability: 
+Automate deployments, leading to more reliable and predictable software releases. 
+### Scalability: 
+Jenkins can be scaled to handle large and complex projects. 
+### Open Source: 
+Jenkins is free to use and customize. 
+## Jenkins Architecture:
+### Jenkins Master: 
+The central server that manages jobs, builds, and other tasks.
+### Jenkins Agents (Slaves):
+Nodes that execute jobs and builds.
+### Web Interface: 
+Jenkins provides a web-based interface for managing jobs, pipelines, and other settings. 
+## Jenkins Pipeline Types
+### Declarative Pipeline: 
+A more structured and easier-to-use approach for defining pipelines.
+### Scripted Pipeline:
+A more flexible approach that allows for custom logic and scripting.
+### Multibranch Pipeline:
+A pipeline that automatically builds and tests multiple branches of a project.
+### Shared Library Pipeline:
+A way to reuse pipeline logic across multiple projects. 
 
-```shell
-createuser sonar
-```
-9. Log in to PostgreSQL
-
-```shell 
-psql 
-```
-
-10. Set a password for the sonar user
-
-```shell 
-ALTER USER sonar WITH ENCRYPTED password 'yourPassword';
-```
-
-11. Create a sonarqube database and set the owner to sonar
-
-```shell 
-CREATE DATABASE sonarqube OWNER sonar;
-```
-
-12. Grant all the privileges on the sonarqube database to the sonar user
-
-```shell
- GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;
- ```
-
-13. Exit PostgreSQL
-
-```shell 
-\q 
-```
-
-14. Return to your non-root sudo user account
-
-```shell
- exit 
- ```
-
-15. Install the zip utility.
-
-```shell
- sudo apt-get install zip -y
- ```
-
-16. Download the SonarQube distribution files. I am using the version 9.9 LTS.
-
-```shell 
-sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-25.3.0.104237.zip
-```
-
-17. Unzip the downloaded file
-
-```shell 
-sudo unzip sonarqube-9.9.3.79811.zip
-```
-
-18. Move the unzipped files to /opt/sonarqube directory
-
-```shell 
-sudo mv sonarqube-9.9.3.79811 /opt/sonarqube
-```
-
-19. Create a sonar user
-
-```shell 
-sudo useradd sonar
-```
-
-20. Create a sonar user and set /opt/sonarqube as the home directory
-
-sudo useradd -d /opt/sonarqube -g sonar sonar
-21. Grant the sonar user access to the /opt/sonarqube directory
-
-```shell 
-sudo chown sonar:sonar /opt/sonarqube -R
-```
-
-22. Configure SonarQube. Edit the SonarQube configuration file
-
-```shell 
-sudo nano /opt/sonarqube/conf/sonar.properties
-```
-
-* Find the following lines and uncomment it:
-
-#sonar.jdbc.username=
-#sonar.jdbc.password=
-* Add the database user and password you created in Step 10
-
-```shell 
-sonar.jdbc.username=sonar
-sonar.jdbc.password=yourPassword 
-``` 
-
-Below those two lines, add this:
-
-```shell 
-sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube 
-```
-
-Save and exit the file.
-
-## Setup systemd service
-
-Create a systemd service file to start SonarQube at system boot.
-
-```shell
-sudo nano /etc/systemd/system/sonar.service
-
-#Paste the following lines to the file
-
-[Unit]
-Description=SonarQube service
-After=syslog.target network.target
-
-[Service]
-Type=forking
-User=sonar
-Group=sonar
-ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
-ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
-StandardOutput=journal
-LimitNOFILE=131072
-LimitNPROC=8192
-TimeoutStartSec=5
-Restart=always
-SuccessExitStatus=143
-
-[Install]
-WantedBy=multi-user.target
-```
-24. Start & Enable the SonarQube service to run at system startup
-```shell
-sudo systemctl start sonar
-sudo systemctl enable sonar
-sudo systemctl status sonar
-```
-25. Modify Kernel System Limits
-
-SonarQube uses Elasticsearch to store its indices in an MMap FS directory. It requires some changes to the system defaults.
-
-Edit the sysctl configuration file
-```shell
-sudo nano /etc/sysctl.conf
-#Add the following lines. Save and exit
-
-vm.max_map_count=262144
-fs.file-max=65536
-ulimit -n 131072
-ulimit -u 8192
-```
-Reboot the system to apply the changes
-
-sudo reboot
-26. Access SonarQube Web Interface
-
-Access SonarQube in a web browser at your server’s IP address on port 9000. For example:
-
-http://<yourIP>:9000
-Log in with username admin and password admin
-
-SonarQube will prompt you to change your password
