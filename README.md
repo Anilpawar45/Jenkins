@@ -42,6 +42,7 @@ customize jenkins
 1. install suggested plugins
 2. select plugins to install
 select without plugins 2
+
 select --> none --install jenkins
 
 
