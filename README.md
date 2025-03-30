@@ -4,6 +4,52 @@ Jenkins is an open-source automation server used for implementing continuous int
 Jenkins is a self-contained, open-source automation server written in Java that facilitates the automation of tasks related to building, testing, and deploying software. 
 ## CI/CD:
 Jenkins is primarily used to implement CI/CD workflows, which automate the process of integrating code changes, building, testing, and deploying software. 
+
+# Jenkins installation process
+```
+sudo apt-get update
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+```
+
+## java package download
+```
+sudo apt-get update
+sudo apt-get install openjdk-17-jdk -y
+java --version
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo systemctl status jenkins
+```
+
+### Security group add 
+port add 8080 
+hit public ip --> 0.0.0.0:8080 this like
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## How it works:
 Jenkins automates these processes by executing jobs triggered by events like new commits, branches, or pull requests. 
 ## What is Jenkins?
