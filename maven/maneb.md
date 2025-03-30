@@ -45,3 +45,21 @@ install Java in --> jenkins & nodes
 sudo apt install maven -y
 mvn -version
 ```
+### Creating a project
+```
+mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=myproject
+```
+ls -a
+cd myproject/
+sudo apt-get install tree -y
+tree
+cd studentapp.ui/
+```
+### maven command to project build
+```
+mvn validate
+mvn package
+mvn clean
+mvn clean package
+```
+
