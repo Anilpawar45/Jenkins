@@ -8,7 +8,6 @@ pipeline {
                 echo "Building is done"
             }
         }
-    }
     stage ('Test') {
         steps {
             echo " Testing is done"
@@ -19,4 +18,5 @@ pipeline {
             echo " Deployment is done"
         }
     }
+  }       
 }
